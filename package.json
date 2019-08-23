@@ -1,0 +1,56 @@
+{
+  "name": "gulp-sass-bootstrap-boilerplate",
+  "version": "1.0.1",
+  "main": "gulpfile.js",
+  "author": "abhijithvijayan",
+  "license": "MIT",
+  "description": "Gulp Sass Bootstrap Boilerplate",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhijithvijayan/gulp-sass-boilerplate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/abhijithvijayan/gulp-sass-boilerplate/issues"
+  },
+  "homepage": "https://github.com/abhijithvijayan/gulp-sass-boilerplate#readme",
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "@fortawesome/fontawesome-free": "^5.10.1",
+    "browser-sync": "^2.26.3",
+    "del": "^3.0.0",
+    "gulp": "^4.0.0",
+    "gulp-autoprefixer": "^6.1.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-cache": "^1.1.1",
+    "gulp-clean-css": "^4.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-imagemin": "^5.0.3",
+    "gulp-rev": "^9.0.0",
+    "gulp-rev-rewrite": "^1.1.4",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2",
+    "node-sass": "^4.11.0",
+    "pump": "^3.0.0"
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "gulp-postcss": "^8.0.0",
+    "howler": "^2.1.2",
+    "jquery": "^3.4.0",
+    "popper.js": "^1.15.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "gulp",
+    "sass",
+    "bootstrap",
+    "jquery",
+    "popperjs",
+    "livereload",
+    "browsersync"
+  ]
+}

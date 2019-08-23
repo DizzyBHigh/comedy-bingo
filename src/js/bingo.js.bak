@@ -1,0 +1,143 @@
+$(document).ready(function () {
+    //Load in word Dta from commics
+    let comics = [
+        {
+            name:'Near',
+            color:'danger',
+            words:[
+                "Hospital",
+                "School",
+                "Sex",
+                "Holidays",
+                "Teachers",
+                "Dogs",
+                "Trains",
+                "Cars",
+                "Art",
+                "Planes",
+                "The Moon Landings",
+                "Politics",
+                "London",
+                "Germany",
+                "USA",
+            ]
+        },
+        {
+            name:'Dayne',
+            color:'info',
+            words:[
+                "Work",
+                "Food",
+                "Films",
+                "Alcohol",
+                "Drugs",
+                "Social Media",
+                "Parties",
+                "Dreams",
+                "Relationships",
+                "Family",
+                "Adverts",
+                "Sports",
+                "Music",
+                "Fashion",
+                "Fridges",
+            ]
+        },
+        {
+            name:'Helen',
+            color:'warning',
+            words:[
+                "Birth",
+                "Tattoos",
+                "Pirates",
+                "Diseases",
+                "Ice Cream",
+                "Smoking",
+                "Airplanes",
+                "Elevators",
+                "McDonalds",
+                "Public Toilets",
+                "Lidl",
+                "Dating Apps",
+                "Fizzy Water",
+                "Bicycle",
+                "Banks",
+            ]
+        },
+    ];
+    let slots = [];
+    let balls = [];
+    //let count = getTotalWords();
+    let shuffle = function(slots) {
+        var currentIndex = slots.length,
+            temporaryValue, randomIndex;
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+            // Pick a remaining element...
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+            // And swap it with the current element.
+            temporaryValue = slots[currentIndex];
+            slots[currentIndex] = slots[randomIndex];
+            slots[randomIndex] = temporaryValue;
+            //add move stuff here....
+        }
+        return array;
+    };
+    let shuffle2 = function(slots) {
+        let m = slots.length, t, i;
+        // While there remain elements to shuffle…
+        while (m) {
+            // Pick a remaining element…
+            i = Math.floor(Math.random() * m--);
+            // And swap it with the current element.
+            t = slots[m].ball;
+            slots[m].ball = slots[i].ball;
+            slots[i].ball = t;
+            //add move stuff here....
+        }
+        return slots;
+    };
+    let getBoardSlotDiv = function(slot){
+        return('<div id="'+slot.jdiv+'" class="ball badge badge-pill badge-secondary">&nbsp</div>');
+    };
+    let getBoardBallDiv = function(slot){
+        return('<div id="'+slot.div+'" class="ball badge badge-pill badge-secondary">'+slot.ball.word+'</div>');
+    };
+    let initBingo = function(comics){
+        slots = [];
+        balls = [];
+        let count = 0;
+        comics.forEach(function(comic, id) {
+            comic.words.forEach(function (word) {
+                let ball = {
+                    'id': count,
+                    'boardGoneClass': 'ball badge badge-pill badge-secondary ',
+                    'boardActiveClass': 'ball badge badge-pill badge-'+comic.color+' ',
+                    'callSpotClass': 'current-ball ball badge badge-pill badge-'+comic.color+' ',
+                    'callPoolClass': 'pool-ball ball badge badge-pill badge-'+comic.color+' ',
+                    'word': word
+                };
+                balls.push(ball);
+                let slot = {'id': count, 'jdiv': '#slot-'+count, 'div': 'slot-'+count, 'color': 'secondary', 'ball': ball};
+                slots.push(slot);
+                $('#bingo-board').append(getBoardSlotDiv(slot));
+                count++;
+            });
+        });
+    };
+
+    let addBoardBall = function(slot){
+        let div = getBoardBallDiv(slot);
+        console.log(div, slot.jdiv);
+        $(slot.jdiv).replaceWith(div);//need to animate
+    };
+    let addBoardBalls = function(slots){
+        slots.forEach(function(slot){
+            addBoardBall(slot);
+        });
+    };
+    initBingo(comics);
+    console.log(slots);
+    addBoardBalls(slots);
+});
