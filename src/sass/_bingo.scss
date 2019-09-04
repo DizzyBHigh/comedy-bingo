@@ -471,7 +471,16 @@ body {
 #bingo-board {
   justify-content: center;
 }
-
+#bingo-result {
+  margin: 10px 6% 10px 5%;
+  padding: 10px;
+  text-align: center;
+  font-size: 20px;
+  width: 100%;
+  color: black;
+  background-color: whitesmoke;
+  border-radius: 10px;
+}
 #info-panel {
   margin: 10px 6% 10px 5%;
   padding: 10px;
@@ -488,7 +497,7 @@ body {
   font-size: 20px;
   width: 100%;
   color: black;
-  background-color: slategray;
+  background-color: whitesmoke;
   border-radius: 10px;
 }
 
@@ -555,6 +564,15 @@ body {
   text-align: center;
   font-size: 25px;
   border: solid white 2px;
+}
+.big-ball{
+  padding: 2px 10px 2px 10px;
+  margin: 20px 5px;
+  text-align: center;
+  font-size: 60px;
+  border: solid white 2px;
+  width: 100%;
+  font-family: 'Rajdhani', sans-serif;
 }
 
 .progress {

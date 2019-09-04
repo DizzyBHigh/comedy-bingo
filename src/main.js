@@ -20,55 +20,49 @@ $(document).ready(function () {
   };
 
   let comics = [
-    {name: 'Deo Katunga',
+    {name: 'Dayne Brasher',
       color: 'warning',
       words: [
-          "Old people",
-          "Body Odour",
-          "Racism",
-          "Sex",
-          "Weird Shit",
-          "Ghosts",
-          "This Club",
-          "Bingo",
-          "Yo Momma",
-          "Biking",
+          "Monkeys",
+          "Alcohol",
+          "LSD",
+          "Religion",
+          "Dolphins",
+          "Spiders",
+          "Goldfish",
+          "Divorce",
+          "Trains",
+          "Kangaroos",
+          "Work",
+          "Dating Apps",
+          "Cyclists",
+          "Apocalypse",
+          "Real Estate",
       ],
     },
     {
-      name: 'Foster Yow',
-      color: 'info',
-      words: [
-        "TV Shows",
-        "Guns",
-        "Blessing",
-        "Evolution",
-        "Single",
-        "Getting Old",
-        "Highlander",
-        "Conversation",
-        "Tired",
-        "Emails",
-      ],
-    },
-    {
-      name: 'Saeed Green',
+      name: 'Naama Kun',
       color: 'success',
       words: [
-        "Animals",
-        "Ugly Feet",
-        "U-Bahn",
-        "Dating",
-        "Berlin",
-        "School",
-        "Comedians",
-        "Women",
-        "The Gym",
-        "Veganism"
+        "Pleasant",
+        "Consequences",
+        "Jail",
+        "Colours",
+        "Language",
+        "Queer",
+        "Nazis",
+        "Inclusive",
+        "Palestinian's",
+        "Struggle",
+        "Judgement",
+        "Random",
+        "Hobbies",
+        "Bookshops",
+        "Grandma's",
       ],
     },
   ];
-  let bingoCardURL = 'https://mfbc.us/m/cwr6um';
+  let bingoCardURL = 'https://mfbc.us/m/ka49sv';
   let gameInfo = '<div class="cardlink">Ask for a Bingo card, or get a card on your phone from: <a class="cardlink" href="' + bingoCardURL + '" >' + bingoCardURL + '</a></div>';
   let slots = [];
   let balls = [];
@@ -154,6 +148,9 @@ $(document).ready(function () {
   let getCalledZoneDiv = function (slot) {
     return ('<div id="calledHidden-' + slot.id + '" class="pool-ball badge badge-pill badge-' + slot.ball.color + '">' + slot.ball.word + '</div>');
   };
+  let getBingoResultDiv = function (slot) {
+    return ('<div class="big-ball badge badge-pill badge-' + slot.ball.color + '">' + slot.ball.word + '</div>');
+  };
   // Array for handling how long the cycles last
   let cycleCount = function () {
     let num = slots.length;
@@ -185,7 +182,7 @@ $(document).ready(function () {
     $('#load').show();
     $('#info-panel').html(gameInfo);
     //$('#shuffle').hide();
-    $('#call-panel').hide();
+    //$('#call-panel').hide();
     let count = 0;
     comics.forEach(function (comic) {
       comic.words.forEach(function (word) {
@@ -215,8 +212,10 @@ $(document).ready(function () {
     });
     $('#ball-count').html('Press Call to Start');
     $('#ball-left').html(' (' + (slots.length) + ' Balls Left )');
-    $('#round-panel').hide();
-    $('#nextround').html('Start');
+    $('#nextround').html('Game Starts 21:15');
+    $('#call-panel').show();
+    $('#round-panel').show();
+    $('#load').click();
   };
   // Refresh SIngle Ball on Board
   let refreshBoardBall = function (slot) {
@@ -241,7 +240,8 @@ $(document).ready(function () {
   // Set Slot as Current Ball
   let setCurrent = function (slot) {
     let div = getCurrentBallDiv(slot);
-    $('#current-ball').replaceWith(div).pulse({times: 1, duration: 300})
+    $('#current-ball').replaceWith(div).pulse({times: 1, duration: 300});
+    $('#bingo-result').html(getBingoResultDiv(slot));
   };
   // Cycle through Balls and Flash
   let cycleBalls = function () {
@@ -249,6 +249,7 @@ $(document).ready(function () {
     let slot = slots[Math.floor(Math.random() * m)];
     flashBall(slot);
     setCurrent(slot);
+
   };
   //Move Selected Ball to Call Area
   let moveToCalled = function () {
@@ -277,6 +278,10 @@ $(document).ready(function () {
     setCurrent(slot);
     let div = getBoardSlotDiv(slot);
     $(slot.jdiv).replaceWith(div);
+
+    let bigdiv = getBingoResultDiv(slot);
+    $('#bingo-result').html(bigdiv);
+
     moveNext.push(slot);
     slots.splice(i, 1);
     console.log(slots);
@@ -286,6 +291,9 @@ $(document).ready(function () {
     $('#ball-count').html('Ball - ' + currentBall);
     $('#ball-left').html(' (' + (slots.length) + ' Balls Left )');
     moveToCalled();
+  
+    
+
   };
   // Ball Loader
   let loadTimer = function (slots) {
@@ -341,6 +349,15 @@ $(document).ready(function () {
     };
     loop();
   };
+  let loadGame = function () {
+    stopTimer();
+    $('body').removeClass('blackout');
+    //$('#call').text('Call').removeClass('disabled');
+    //$('.timer-group').removeClass('d-none')
+    timerStart = $('#timer-count').val();
+    $('#input').html("Start");
+    loadTimer(slots);
+  }
   let newGame = function() {
     stopTimer();
     $('body').removeClass('blackout');
@@ -354,15 +371,9 @@ $(document).ready(function () {
   initBingo(comics);
   $('#blips').hide();
   // BUTTONS
-  $('#load, #newgame').click(function () {
-    stopTimer();
-    $('body').removeClass('blackout');
-    //$('#call').text('Call').removeClass('disabled');
-    //$('.timer-group').removeClass('d-none')
-    timerStart = $('#timer-count').val();
-    $('#input').html("Start");
-    loadTimer(slots);
-  });
+  $('#load, #newgame').click(
+    loadGame()
+  );
   $('#shuffle').click(function () {
     $('#blips').show().fadeIn('slow');
     looper(slots, singleShuffle, 200, 3);
