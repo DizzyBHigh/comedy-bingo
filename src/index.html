@@ -21,14 +21,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  ml-auto">
                 <li class="nav-item">
-                    <button type="button" class="btn btn-block btn-lg btn-success" id="load">Load</button>
+                    <button type="button" class="btn btn-block btn-xs btn-success" id="load">Load</button>
                 </li>
                 <li class="nav-item">
-                    <button type="button" class="btn btn-block btn-lg btn-info" id="shuffle">Shuffle</button>
+                    <button type="button" class="btn btn-block btn-xs btn-info" id="shuffle">Shuffle</button>
                 </li>
 
                 <li class="nav-item">
-                    <button type="button" class="btn btn-block btn-lg btn-secondary" id="showcalled">Show Called</button>
+                    <button type="button" class="btn btn-block btn-xs btn-secondary" id="showcalled">Show Called</button>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="modal" data-target="#newGameModal" href="">Settngs</a>
@@ -71,9 +71,13 @@
                         </div>
                     </div>
                     <div class="row">
+                        
+                    </div>
+                    <div class="row">
+                        <div id="bingo-result" class="text-center"></div>
                         <div id="bingo-board" class="text-center"></div>
                     </div>
-
+                    
 
                     <div class="progress" id="blips">
                         <div class="progress-bar" role="progressbar">
@@ -134,9 +138,7 @@
                 </div>
             </div>
         </div>
-    </div><footer>
-        <p><a href="http://facebook.com/AgataBarBerlin">Comedy Bingo Caller v1 &copy; Out The Box 2019</a></p>
-    </footer>
+    </div>
     <!-- BODY CONTENT ENDS HERE -->
         <!-- inject js -->
         <script src="js/bundle.js"></script>

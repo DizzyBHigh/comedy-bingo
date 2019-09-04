@@ -4,7 +4,7 @@ let startTime = Default;
 let time;
 let freq = 1000;
 let timerInProcess = false;
-
+let remainingTime = 0;
 function advanceTimer() {
     mylet = setTimeout(function () {
         $('#timer').html(time);
@@ -17,7 +17,7 @@ function advanceTimer() {
         }
         if (time === -1) {
             stopTimer();
-            sounds.playSprite('bell', 'bell');
+            sounds.play('buzzer');
             return;
         }
         if (!time && time !== 0) {
@@ -40,15 +40,9 @@ $('#timerControl').click(function () {
         if (!startTime) {
             $('#setTime').val(Default);
             startTime = Default;
-        //     $('#addAlert').html(`<div class="alert alert-warning alert-dismissible fade show" role="alert">
-        //     <strong>FYI</strong> Your custom time input was invalid and was reset to the default time.
-        //     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        //         <span aria-hidden="true">&times;</span>
-        //     </button>
-        // </div>`);
         }
         time = startTime - 1;
-        sounds.playSprite();
+        //sounds.playSprite();
         $('#timer').html(startTime);
 
 

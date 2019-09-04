@@ -19,7 +19,7 @@
       <paths name="MultiKulti">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/bingo" local="$PROJECT_DIR$/DIST" web="/bingo" />
           </mappings>
         </serverdata>
       </paths>
