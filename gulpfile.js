@@ -37,6 +37,7 @@ var sass_src = "./src/sass/main.scss",
     popperjs = "node_modules/popper.js/dist/umd/popper.min.js",
     bootstrap = "node_modules/bootstrap/dist/js/bootstrap.min.js",
     howler = "node_modules/howler/dist/howler.min.js",
+    videojs = "node_modules/howler/dist/howler.min.js",
 
     fa_src = './node_modules/@fortawesome/fontawesome-free/webfonts/*',
     fa_local = './src/webfonts',
@@ -89,7 +90,7 @@ gulp.task("build-sass", () => {
 // bundle dependencies js
 gulp.task("vendor-js", done => {
     return gulp
-        .src([jquery, popperjs, bootstrap, howler])
+        .src([jquery, popperjs, bootstrap, howler, videojs])
         .pipe(concat("vendor-bundle.js"))
         .pipe(gulp.dest(build));
     done();

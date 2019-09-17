@@ -39,7 +39,8 @@
     "gulp-postcss": "^8.0.0",
     "howler": "^2.1.2",
     "jquery": "^3.4.0",
-    "popper.js": "^1.15.0"
+    "popper.js": "^1.15.0",
+    "video.js": "^7.6.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
