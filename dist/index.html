@@ -6,7 +6,7 @@
         <title>Out The Box - Comedy Bingo</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- inject css -->
-        <link rel="stylesheet" href="css/style-582baf5beb.css" />
+        <link rel="stylesheet" href="css/style-ebd82b7f59.css" />
     </head>
     <body>
     <!-- BODY CONTENT STARTS HERE -->
@@ -20,6 +20,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  ml-auto">
+                <div id="info-panel" class="text-center"></div>
                 <li class="nav-item">
                     <button type="button" class="btn btn-block btn-xs btn-success" id="load">Load</button>
                 </li>
@@ -43,8 +44,7 @@
         <div class="row">
             <div class="col-lg-2 offset-1">
                 <div id="call-panel" class="card bg-dark">
-                    <button id="timerControl" class="btn btn-block btn-lg btn-outline-info"><i class="far fa-clock"></i> Start Timer</button>
-                    <button type="button" class="btn btn-block btn-lg btn-success" id="call">CALL</button>
+
                     <div id="ball-count" class="text-center badge-pill badge-secondary"></div>
                     <div id="current-ball" class="ball badge badge-pill badge-secondary text-center">Called Ball</div>
                     <div id="ball-left" class="text-center badge-pill badge-secondary"></div>
@@ -62,32 +62,71 @@
 
             <div class="col-lg-9">
                 <div class="row ">
-                    <div class="col-lg-3 offset-1">
-                        <span id="timer" class="timer text-center"></span>
+                    <div id="timer" class="col-lg-2 offset-1 timer text-center">
+                        90
                     </div>
-                        <div class="col-lg-6">
-                            <div id="info-panel" class="text-center"></div>
+                    <div class="col-lg-9">
+                        <button id="buzzer" class="btn btn-lg btn-danger"><i class="fas fa-skull-crossbones"></i></button>
+                        <button id="timerControl" class="btn btn-lg btn-outline-info"><i class="far fa-clock"></i> Start Timer</button>
 
+                    </div>
+                    <div class="col-lg-4">
+                        <div id="info-panel" class="text-center"></div>
+                    </div>
+                    </div>
+                <div class="row">
+                    <div class="col-lg-10 offset-1">
+                    <button class="btn btn-block btn-lg btn-success" id="call">CALL</button>
+                    </div>
+                </div>
+                    <div class="row">
+                        <div class="col-lg-10 offset-1 ">
+                        <div id="bingo-result" class="text-center"></div>
                         </div>
                     </div>
                     <div class="row">
                         
-                    </div>
-                    <div class="row">
-                        <div id="bingo-result" class="text-center"></div>
                         <div id="bingo-board" class="text-center"></div>
                     </div>
-                    
-
+<!--                    <div id="call-section" class="row">-->
+<!--                        <div id="extras-section" class="col-lg-10 offset-1 ">-->
+<!--                            <video-->
+<!--                                id="my-player"-->
+<!--                                class="video-js"-->
+<!--                                controls-->
+<!--                                preload="auto"-->
+<!--                                poster="//vjs.zencdn.net/v/oceans.png"-->
+<!--                                data-setup='{}'-->
+<!--                            >-->
+<!--                                <source src="//vjs.zencdn.net/v/oceans.mp4" type="video/mp4"></source>-->
+<!--                                <source src="//vjs.zencdn.net/v/oceans.webm" type="video/webm"></source>-->
+<!--                                <source src="//vjs.zencdn.net/v/oceans.ogv" type="video/ogg"></source>-->
+<!--                                <p class="vjs-no-js">-->
+<!--                                    To view this video please enable JavaScript, and consider upgrading to a-->
+<!--                                    web browser that-->
+<!--                                    <a href="https://videojs.com/html5-video-support/" target="_blank">-->
+<!--                                        supports HTML5 video-->
+<!--                                    </a>-->
+<!--                                </p>-->
+<!--                            </video>-->
+<!--                        </div>-->
+<!--                    </div>-->
                     <div class="progress" id="blips">
                         <div class="progress-bar" role="progressbar">
                             <span class="sr-only"></span>
                         </div>
                     </div>
-                    <div class="row">
-                        <div id="call-zone" class="text-center"></div>
-                        <div id="hidden-call-zone" class=" text-center d-none"></div>
+                    <div id="call-section" class="row">
+                        <div class="col-lg-10 offset-1 ">
+                            <div id="call-zone" class="text-center"></div>
+                        </div>
+                        <div class="col-lg-10 offset-1 ">
+                            <div id="hidden-call-zone" class=" text-center d-none"></div>
+                        </div>
                     </div>
+<!--                    <div id="extras-section" class="row text-center">-->
+<!--
+<!--                    </div>-->
                 </div>
             </div>
         </div>
@@ -141,6 +180,6 @@
     </div>
     <!-- BODY CONTENT ENDS HERE -->
         <!-- inject js -->
-        <script src="js/bundle-1e3970775b.js"></script>
+        <script src="js/bundle-c64cafe69a.js"></script>
     </body>
 </html>

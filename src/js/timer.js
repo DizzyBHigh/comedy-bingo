@@ -29,7 +29,7 @@ function advanceTimer() {
 
 function stopTimer() {
     $('#timerControl').addClass('timerRunning').html('<i class="far fa-clock"></i> Start Timer');
-    $('#timer').text(' ');
+    $('#timer').text('90');
     clearTimeout(mylet);
 }
 
@@ -55,4 +55,3 @@ $('#timerControl').click(function () {
         stopTimer();
     }
 });
-

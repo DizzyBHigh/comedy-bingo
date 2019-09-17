@@ -6,19 +6,19 @@ let sounds = {
     }),
     'toggle': new Howl({
         src: ['assets/sounds/Toggle-SoundBible.com-231290292.mp3'],
-        volume: 1.0,
+        volume: 0.2,
     }),
     'crumbling': new Howl({
         src: ['assets/sounds/Crumbling-Mike_Koenig-1123041125.mp3'],
-        volume: 1.0,
+        volume: 0.5,
     }),
     'fireBow': new Howl({
         src: ['assets/sounds/fire_bow_sound-mike-koenig.mp3'],
-        volume: 1.0,
+        volume: 0.5,
     }),
     'marbles': new Howl({
         src: ['assets/sounds/marbles-daniel_simon.mp3'],
-        volume: 1.0,
+        volume: 0.5,
     }),
     'pokerChips': new Howl({
         src: ['assets/sounds/poker-chips-daniel_simon.mp3'],
@@ -26,7 +26,7 @@ let sounds = {
     }),
     'smsBeep': new Howl({
         src: ['assets/sounds/sms-alert-5-daniel_simon.mp3'],
-        volume: 1.0,
+        volume: 0.80,
     }),
     'tick': new Howl({
         src: ['assets/sounds/Tick-DeepFrozenApps-397275646.mp3'],
@@ -42,7 +42,7 @@ let sounds = {
     }),
     'bell': new Howl({
         src: ['assets/sounds/old-fashioned-door-bell-daniel_simon.mp3'],
-        volume: 1.0,
+        volume: .80,
         sprite: {
             bell: [0, 4000]
         }
