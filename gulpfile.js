@@ -28,6 +28,8 @@ var sass_src = "./src/sass/main.scss",
     sound_src = "./src/assets/sounds/*.*",
     sound_dist = "./dist/assets/sounds",
 
+    data_src = "./src/data/data.json",
+    data_dist = "./dist/data/",
     assets = "./dist/assets",
     build = "./dist/build/",
     temp = "./dist/build/temp/",
@@ -165,17 +167,25 @@ gulp.task(
         done();
     })
 );
+// data file build
+gulp.task(
+    "build-data",
+    gulp.series(function (done) {
+        return gulp.src(data_src).pipe(gulp.dest(data_dist));
+        done();
+    })
+);
 
 // build and minify
 gulp.task(
     "build-compress",
-    gulp.parallel("build-html", "build-sass", "compress-js", "optimise-img", "build-sound", "fontawesome")
+    gulp.parallel("build-html", "build-sass", "compress-js", "optimise-img", "build-sound", "build-data",  "fontawesome")
 );
 
 // build files
 gulp.task(
     "build-all",
-    gulp.parallel("build-html", "build-sass", "bundle-js", "optimise-img", "build-sound", "fontawesome")
+    gulp.parallel("build-html", "build-sass", "bundle-js", "optimise-img", "build-sound", "build-data", "fontawesome")
 );
 
 // clean previous build
