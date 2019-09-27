@@ -5,13 +5,13 @@ $(document).ready(function () {
       duration: 1000
     }, options);
 
-    var period = function (callback) {
+    let period = function (callback) {
       $(this).animate({opacity: 0}, options.duration, function () {
         $(this).animate({opacity: 1}, options.duration, callback);
       });
     };
     return this.each(function () {
-      var i = +options.times, self = this,
+      let i = +options.times, self = this,
           repeat = function () {
             --i && period.call(self, repeat)
           };
@@ -19,56 +19,31 @@ $(document).ready(function () {
     });
   };
 
-  let comics = [
-    {
-      name: 'Adam Marguiles',
-      color: 'warning',
-      words: [
-          "Jews",
-          "Great Apes",
-          "Ghandi",
-          "Trump",
-          "Racism",
-          "#Her-Also",
-          "FatherHood",
-          "Obesity",
-          "Master Morals",
-          "Pod-Casts",
-          "Bullies",
-          "Word",
-          "Patriarchy",
-          "Instagram",
-          "Moby Dick",
-      ],
-    },
-    {
-      name: 'Sonny Mann',
-      color: 'success',
-      words: [
-        "Spicy Food",
-        "School",
-        "Yoga",
-        "Rain",
-        "Flying",
-        "Beards",
-        "Taken",
-        "Tinder",
-        "Arguments",
-        "Twins",
-        "Equality",
-        "Decisions",
-        "Funny Accents",
-        "Beauty Products",
-        "Advertising",
-      ],
-    },
-  ];
-  let bingoCardURL = 'https://mfbc.us/m/dztkvn';
+  let bingoCardURL = 'https://mfbc.us/m/kxxffb';
   let gameInfo = '<span class="cardlink">Ask for a Bingo card, or get a card on your phone from: <a class="cardlink" href="' + bingoCardURL + '" >' + bingoCardURL + '</a></span>';
+  let comics = [];
   let slots = [];
   let balls = [];
   let calledBalls = [];
   let moveNext = [];
+  let mediaCount = 0;
+  let loadData = function () {
+    return new Promise((resolve, reject) => {
+      $.ajax({
+        type: "GET",
+        url: "data/data.json", // Using our resources.json file to serve results
+        dataType: 'json',
+        success: function (data) {
+          resolve(data);
+        },
+        error: function (error) {
+          reject(error)
+        },
+      })
+    })
+  };
+
+
   let gameRound = [
     {
       'round': 'Waiting To Start',
@@ -153,7 +128,14 @@ $(document).ready(function () {
     return ('<div id="calledHidden-' + slot.id + '" class="pool-ball badge badge-pill badge-' + slot.ball.color + '">' + slot.ball.word + '</div>');
   };
   let getBingoResultDiv = function (slot) {
-    return ('<div class="big-ball badge badge-pill badge-' + slot.ball.color + '">' + slot.ball.word + '</div>');
+    let link = '#';
+    console.log(slot.ball);
+    if (slot.ball.links && slot.ball.links.length) {
+      link = slot.ball.links[0].link;
+      return ('<a href="' + link + '" target="_blank" id="extras" class="big-ball badge badge-pill badge-' + slot.ball.color + '">' + slot.ball.word + '</a>')
+    } else {
+      return ('<div id="extras" class="big-ball badge badge-pill badge-' + slot.ball.color + '">' + slot.ball.word + '</div>');
+    }
   };
   // Array for handling how long the cycles last
   let cycleCount = function () {
@@ -179,38 +161,48 @@ $(document).ready(function () {
     return (10);
   };
   // Init The Bing Game
-  let initBingo = function (comics) {
+  let initBingo = function () {
     slots = [];
     balls = [];
     calledBalls = [];
-    $('#load').show();
     $('#info-panel').html(gameInfo);
     //$('#shuffle').hide();
     //$('#call-panel').hide();
     let count = 0;
     let wordCount = 0;
+    let totalWords = 0;
     let comic = [];
     let word = [];
-    let totalWords = comics[count].words.length *2;
+    let color = [];
+    let links = [];
+    comics.forEach(function (comic) {
+      totalWords += comic.words.length;
+    });
+    //let totalWords = comics[count].words.length *2;
     for (let i = 0; i < totalWords; i++) {
       if (count === 0) {
         comic = comics[count];
-        word = comics[count].words[wordCount];
+        word = comics[count].words[wordCount].word;
+        color = comics[count].words[wordCount].color;
+        links = comics[count].words[wordCount].links;
         count++;
       } else {
-        word = comics[count].words[wordCount];
+        word = comics[count].words[wordCount].word;
+        color = comics[count].words[wordCount].color;
         comic = comics[count];
+        links = comics[count].words[wordCount].links;
         count = 0;
         wordCount++;
       }
       let ball = {
         'id': i,
         'boardGoneClass': 'ball badge badge-pill badge-secondary ',
-        'boardActiveClass': 'ball badge badge-pill badge-' + comic.color + ' ',
-        'callSpotClass': 'current-ball ball badge badge-pill badge-' + comic.color + ' ',
-        'callPoolClass': 'pool-ball ball badge badge-pill badge-' + comic.color + ' ',
-        'color': comic.color,
-        'word': word
+        'boardActiveClass': 'ball badge badge-pill badge-' + color + ' ',
+        'callSpotClass': 'current-ball ball badge badge-pill badge-' + color + ' ',
+        'callPoolClass': 'pool-ball ball badge badge-pill badge-' + color + ' ',
+        'color': color,
+        'word': word,
+        'links': links,
       };
       balls.push(ball);
       let slot = {
@@ -298,6 +290,7 @@ $(document).ready(function () {
     let bigdiv = getBingoResultDiv(slot);
     $('#bingo-result').html(bigdiv);
 
+
     moveNext.push(slot);
     slots.splice(i, 1);
     console.log(slots);
@@ -307,8 +300,8 @@ $(document).ready(function () {
     $('#ball-count').html('Ball - ' + currentBall);
     $('#ball-left').html(' (' + (slots.length) + ' Balls Left )');
     moveToCalled();
-    $('#call').prop("disabled",false);
-    
+    $('#call').prop("disabled", false);
+
 
   };
   // Ball Loader
@@ -374,7 +367,7 @@ $(document).ready(function () {
     $('#input').html("Start");
     loadTimer(slots);
   }
-  let newGame = function() {
+  let newGame = function () {
     stopTimer();
     $('body').removeClass('blackout');
     //$('#call').text('Call').removeClass('disabled');
@@ -388,7 +381,7 @@ $(document).ready(function () {
   $('#blips').hide();
   // BUTTONS
   $('#load, #newgame').click(
-    loadGame()
+      loadGame()
   );
 
   $('#shuffle').click(function () {
@@ -399,7 +392,7 @@ $(document).ready(function () {
   $('#call').click(function () {
     //moveToCalled();
     stopTimer();
-    $(this).prop("disabled",true);
+    $(this).prop("disabled", true);
     caller(cycleBalls, 250, cycleCount(), pickBall);
   });
 
@@ -415,14 +408,30 @@ $(document).ready(function () {
     sounds.play('buzzer');
   });
 
+  $('#bingo-result').click(function () {
+    console.log('clicked');
+  });
 
-
-  $(window).keydown(function(event){
-    if(event.keyCode == 39 || event.keyCode == 13){
+  $(window).keydown(function (event) {
+    if (event.keyCode == 39 || event.keyCode == 13) {
       event.preventDefault();
-      //stopTimer();
-      //$('#call').click();
+      $('#call').click().prop("disabled", true);
       // $('body').css('cursor', 'none');
     }
   });
+
+//load in the data
+
+  loadData().then(data => {
+    comics = data;
+    initBingo();
+    loadGame();
+  }).catch(error => {
+    console.log(error);
+  });
+
+
+  // EDITOR SECTION
+
+
 });
